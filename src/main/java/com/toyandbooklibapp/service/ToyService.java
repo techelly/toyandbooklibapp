@@ -41,7 +41,7 @@ public class ToyService implements IToyService {
 	public Toy viewtoyById(int toyId)  throws ToyNotFoundException{
 		Optional<ToyEntity> optionalToy = toyRepository.findById(toyId);
 		if (!optionalToy.isPresent()) {
-			throw new ToyNotFoundException("toy not existing with id:" + toyId);
+			throw new ToyNotFoundException("Toy not existing with id:" + toyId);
 		}
 		ToyEntity toyEntity = optionalToy.get();
 		// convert toy entity to toy model

@@ -1,31 +1,60 @@
 package com.toyandbooklibapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.toyandbooklibapp.entities.ParentEntity;
+import com.toyandbooklibapp.entities.ToyEntity;
+import com.toyandbooklibapp.exceptions.ParentNotFoundException;
+import com.toyandbooklibapp.exceptions.ResourceNotFoundException;
+import com.toyandbooklibapp.exceptions.ToyNotFoundException;
 import com.toyandbooklibapp.model.MembershipType;
 import com.toyandbooklibapp.model.Parent;
+import com.toyandbooklibapp.model.Toy;
 import com.toyandbooklibapp.repositories.IParentRepository;
 
 @Service
 public class ParentService implements IParentService {
-	
+
 	@Autowired
 	private IParentRepository parentRepository;
-	
-	
+
 	@Override
 	public Parent saveParent(Parent parent) {
-		// TODO Auto-generated method stub
-		return null;
+		// convert parent model to parent entity
+
+		ParentEntity parentEntity = new ParentEntity();
+		BeanUtils.copyProperties(parent, parentEntity);
+
+		ParentEntity newParentEntity = parentRepository.save(parentEntity);
+		// covert parent entity to parent model
+
+		Parent newParent = new Parent();
+		BeanUtils.copyProperties(newParentEntity, newParent);
+
+		return newParent;
 	}
 
 	@Override
 	public List<Parent> viewAllParents() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ParentEntity> parentEntities = (List<ParentEntity>) parentRepository.findAll();
+		if (parentEntities.size() > 0) {
+			// convert parent entity list to parent list
+			List<Parent> parents = new ArrayList<>();
+			parentEntities.forEach(pentity -> {
+				Parent parent = new Parent();
+				BeanUtils.copyProperties(pentity, parent);
+				parents.add(parent);
+			});
+			return parents;
+		} else {
+			throw new ResourceNotFoundException("No parents found");
+		}
 	}
 
 	@Override
@@ -35,15 +64,31 @@ public class ParentService implements IParentService {
 	}
 
 	@Override
-	public Parent deleteParent(Integer parentId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Parent deleteParent(Integer parentId) throws ParentNotFoundException{
+		
+		Optional<ParentEntity> optionalParent = parentRepository.findById(parentId);
+		if (!optionalParent.isPresent()) {
+			throw new ParentNotFoundException("Parent not existing with id:" + parentId);
+		}
+		ParentEntity parentEntity = optionalParent.get();
+		parentRepository.delete(parentEntity);
+		// convert parent entity to parent model
+		Parent parent = new Parent();
+		BeanUtils.copyProperties(parentEntity, parent);
+		return parent;
 	}
 
 	@Override
-	public Parent viewParent(Integer parentId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Parent viewParent(Integer parentId) throws ParentNotFoundException {
+		Optional<ParentEntity> optionalParent = parentRepository.findById(parentId);
+		if (!optionalParent.isPresent()) {
+			throw new ParentNotFoundException("Parent not existing with id:" + parentId);
+		}
+		ParentEntity parentEntity = optionalParent.get();
+		// convert parent entity to parent model
+		Parent parent = new Parent();
+		BeanUtils.copyProperties(parentEntity, parent);
+		return parent;
 	}
 
 	@Override
