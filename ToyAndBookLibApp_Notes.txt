@@ -1,0 +1,65 @@
+create database libapp;
+\c libapp;
+---Execute below queries
+insert into roles values(1,'ROLE_USER');
+insert into roles values(2,'ROLE_CHILD');
+insert into roles values(3,'ROLE_PARENT');
+insert into roles values(4,'ROLE_ADMIN');
+
+*********************************************************************************
+For user registration :--- 
+http://localhost:8080/api/auth/signup
+Use Post method in PostMan below json data has be sent:-
+
+{
+  "username": "saket",
+  "password": "password",
+  "email": "saket@gmail.com",
+  "mobile": "9999106219",
+  "address": "Bengaluru",
+  "gender": "Male",
+  "role": ["child","user"]
+}
+
+{
+  "username": "shlok",
+  "password": "password",
+  "email": "shlok@gmail.com",
+  "mobile": "9999106219",
+  "address": "Bengaluru",
+  "gender": "Male",
+  "role": ["admin"]
+}
+For output refer image 1 , you will get message user registered successfully
+*********************************************************************************
+For login or signin :-
+In postman use post method
+http://localhost:8080/api/auth/signin
+{
+  "username": "saket",
+  "password": "password"
+}
+For output refer image 2 , you will get access token
+*********************************************************************************
+Now using above access token we will access our api's
+For example book api:
+http://localhost:8080/api/toyandbooklibapp/book/save
+Add accesstoken in Authorization-> Drop Down Bearer Token-> Paste the value
+Refer image 3
+
+{
+    "title":"Java",	
+	"price":15.50,	
+	"author":"CapG",	
+	"category":"Programming",
+    "publication":"Pearson"
+}
+
+For output refer image 4
+*********************************************************************************
+http://localhost:8080/api/toyandbooklibapp/book/1
+http://localhost:8080/api/toyandbooklibapp/book/save
+http://localhost:8080/api/toyandbooklibapp/book/all
+http://localhost:8080/api/toyandbooklibapp/book/update
+http://localhost:8080/api/toyandbooklibapp/book/deletebook/1
+http://localhost:8080/api/toyandbooklibapp/book/bytitle/Java
