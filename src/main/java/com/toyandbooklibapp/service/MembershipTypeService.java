@@ -9,12 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.toyandbooklibapp.entities.MembershipTypeEntity;
-import com.toyandbooklibapp.entities.ParentEntity;
 import com.toyandbooklibapp.exceptions.MembershipTypeNotFoundException;
-import com.toyandbooklibapp.exceptions.ParentNotFoundException;
 import com.toyandbooklibapp.exceptions.ResourceNotFoundException;
 import com.toyandbooklibapp.model.MembershipType;
-import com.toyandbooklibapp.model.Parent;
 import com.toyandbooklibapp.repositories.IMembershipTypeRepository;
 
 @Service
@@ -42,7 +39,7 @@ public class MembershipTypeService implements IMembershipTypeService {
 	@Override
 	public List<MembershipType> viewAllMembershipTypes() throws ResourceNotFoundException{
 		List<MembershipTypeEntity> membershipTypeEntities = (List<MembershipTypeEntity>) membershipTypeRepository.findAll();
-		if (membershipTypeEntities.size() > 0) {
+		if (!membershipTypeEntities.isEmpty()) {
 			// convert membershipType entity list to membershipType list
 			List<MembershipType> membershipTypes = new ArrayList<>();
 			membershipTypeEntities.forEach(pentity -> {

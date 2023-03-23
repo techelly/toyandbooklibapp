@@ -53,7 +53,7 @@ public class ToyService implements IToyService {
 	@Override
 	public List<Toy> viewAllToys() throws ResourceNotFoundException{
 		List<ToyEntity> toyEntities = (List<ToyEntity>) toyRepository.findAll();
-		if (toyEntities.size() > 0) {
+		if (!toyEntities.isEmpty()) {
 			// convert toy entity list to toy list
 			List<Toy> toys = new ArrayList<>();
 			toyEntities.forEach(pentity -> {

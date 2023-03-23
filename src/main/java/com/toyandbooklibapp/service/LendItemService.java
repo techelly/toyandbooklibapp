@@ -8,12 +8,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.toyandbooklibapp.entities.LendItemEntity;
-import com.toyandbooklibapp.entities.PaymentEntity;
 import com.toyandbooklibapp.exceptions.LendItemNotFoundException;
-import com.toyandbooklibapp.exceptions.PaymentNotFoundException;
 import com.toyandbooklibapp.exceptions.ResourceNotFoundException;
 import com.toyandbooklibapp.model.LendItem;
-import com.toyandbooklibapp.model.Payment;
 import com.toyandbooklibapp.repositories.ILendItemRepository;
 
 public class LendItemService implements ILendItemService {
@@ -70,9 +67,9 @@ public class LendItemService implements ILendItemService {
 	}
 
 	@Override
-	public List<LendItem> viewAllLendItems() throws ResourceNotFoundException{
+	public List<LendItem> viewAllLendItems() throws ResourceNotFoundException {
 		List<LendItemEntity> lendItemEntities = (List<LendItemEntity>) lendItemRepository.findAll();
-		if (lendItemEntities.size() > 0) {
+		if (!lendItemEntities.isEmpty()) {
 			// convert LendItem entity list to LendItem list
 			List<LendItem> lendItems = new ArrayList<>();
 			lendItemEntities.forEach(pentity -> {

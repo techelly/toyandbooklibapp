@@ -98,7 +98,7 @@ public class BookService implements IBookService {
 	@Override
 	public List<Book> viewAllBooks() throws ResourceNotFoundException {
 		List<BookEntity> bookEntities = (List<BookEntity>) bookRepository.findAll();
-		if (bookEntities.size() > 0) {
+		if (!bookEntities.isEmpty()) {
 			// convert book entity list to book list
 			List<Book> books = new ArrayList<>();
 			bookEntities.forEach(pentity -> {

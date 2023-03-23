@@ -40,7 +40,7 @@ public class ParentService implements IParentService {
 	@Override
 	public List<Parent> viewAllParents() {
 		List<ParentEntity> parentEntities = (List<ParentEntity>) parentRepository.findAll();
-		if (parentEntities.size() > 0) {
+		if (!parentEntities.isEmpty()) {
 			// convert parent entity list to parent list
 			List<Parent> parents = new ArrayList<>();
 			parentEntities.forEach(pentity -> {
@@ -73,8 +73,8 @@ public class ParentService implements IParentService {
 	}
 
 	@Override
-	public Parent deleteParent(Integer parentId) throws ParentNotFoundException{
-		
+	public Parent deleteParent(Integer parentId) throws ParentNotFoundException {
+
 		Optional<ParentEntity> optionalParent = parentRepository.findById(parentId);
 		if (!optionalParent.isPresent()) {
 			throw new ParentNotFoundException("Parent not existing with id:" + parentId);
@@ -99,10 +99,11 @@ public class ParentService implements IParentService {
 		BeanUtils.copyProperties(parentEntity, parent);
 		return parent;
 	}
-	
+
 	/**
 	 * Test properly
-	 * @throws ParentNotFoundException 
+	 * 
+	 * @throws ParentNotFoundException
 	 */
 	@Override
 	public Parent getParentByMembershipType(MembershipType membershiptType) throws ParentNotFoundException {
