@@ -42,7 +42,7 @@ public class LendItemController {
 		return new ResponseEntity<>(lendItems, HttpStatus.OK);
 	}
 
-	@PutMapping("/pament/update")
+	@PutMapping("/lendItem/update")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<LendItem> updateLendItem(@RequestBody LendItem lendItem) throws LendItemNotFoundException {
 		LendItem newLendItem = lendItemService.updateLendItem(lendItem);

@@ -50,7 +50,7 @@ public class PaymentController {
 		return new ResponseEntity<>(payments, HttpStatus.OK);
 	}
 	
-	@PutMapping("/pament/update")
+	@PutMapping("/payment/update")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Payment> updatePayment(@RequestBody Payment payment) throws PaymentNotFoundException{
 		Payment newPayment = paymentService.updatePayment(payment);

@@ -29,7 +29,7 @@ public class ParentController {
 	@Autowired
 	private IParentService parentService;
 
-	@PostMapping("/payment/save")
+	@PostMapping("/parment/save")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Parent> addParent(@RequestBody Parent parent) {
 		Parent newParent = parentService.saveParent(parent);

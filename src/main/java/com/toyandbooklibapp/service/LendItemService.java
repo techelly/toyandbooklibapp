@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.toyandbooklibapp.entities.LendItemEntity;
 import com.toyandbooklibapp.exceptions.LendItemNotFoundException;
@@ -13,6 +14,7 @@ import com.toyandbooklibapp.exceptions.ResourceNotFoundException;
 import com.toyandbooklibapp.model.LendItem;
 import com.toyandbooklibapp.repositories.ILendItemRepository;
 
+@Service
 public class LendItemService implements ILendItemService {
 
 	@Autowired

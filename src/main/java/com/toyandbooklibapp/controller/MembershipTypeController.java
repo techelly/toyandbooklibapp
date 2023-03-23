@@ -50,7 +50,7 @@ public class MembershipTypeController {
 		return new ResponseEntity<>(membershipTypes, HttpStatus.OK);
 	}
 	
-	@PutMapping("/pament/update")
+	@PutMapping("/membershipType/update")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<MembershipType> updateMembershipType(@RequestBody MembershipType membershipType) throws MembershipTypeNotFoundException{
 		MembershipType newMembershipType = membershipTypeService.updateMembershipType(membershipType);
