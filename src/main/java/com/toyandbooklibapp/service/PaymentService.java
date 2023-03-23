@@ -50,7 +50,7 @@ public class PaymentService implements IPaymentService {
 	}
 
 	@Override
-	public List<Payment> viewAllPayments() {
+	public List<Payment> viewAllPayments() throws ResourceNotFoundException{
 		List<PaymentEntity> paymentEntities = (List<PaymentEntity>) paymentRepository.findAll();
 		if (paymentEntities.size() > 0) {
 			// convert payment entity list to payment list

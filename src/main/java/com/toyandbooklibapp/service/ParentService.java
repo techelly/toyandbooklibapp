@@ -9,13 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.toyandbooklibapp.entities.ParentEntity;
-import com.toyandbooklibapp.entities.ToyEntity;
 import com.toyandbooklibapp.exceptions.ParentNotFoundException;
 import com.toyandbooklibapp.exceptions.ResourceNotFoundException;
-import com.toyandbooklibapp.exceptions.ToyNotFoundException;
 import com.toyandbooklibapp.model.MembershipType;
 import com.toyandbooklibapp.model.Parent;
-import com.toyandbooklibapp.model.Toy;
 import com.toyandbooklibapp.repositories.IParentRepository;
 
 @Service

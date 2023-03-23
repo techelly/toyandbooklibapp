@@ -133,6 +133,7 @@ public class AuthController {
 		user.setEmail(signUpRequest.getEmail());
 		user.setMobile(signUpRequest.getMobile());
 		user.setGender(signUpRequest.getGender());
+		//saving UserEntity to the database 
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,9 +52,9 @@ public class BookController {
 	}
 	
 	
-	@PostMapping("/book/update")
+	@PutMapping("/book/update")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<Book> updateBook(Book book) throws BookNotFoundException{
+	public ResponseEntity<Book> updateBook(@RequestBody Book book) throws BookNotFoundException{
 		Book newBook = bookService.updateBook(book);
 		ResponseEntity<Book> responseEntity = new ResponseEntity<>(newBook, HttpStatus.OK);
 		return responseEntity;

@@ -38,4 +38,16 @@ public class GlobalExceptionHandler {
 		ResponseEntity<String> responseEntity = new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
 		return responseEntity;
 	}
+	
+	@ExceptionHandler(MembershipTypeNotFoundException.class)
+	public ResponseEntity<String> handleMembershipTypeNotFoundException(Exception e) {
+		ResponseEntity<String> responseEntity = new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+		return responseEntity;
+	}
+	
+	@ExceptionHandler(LendItemNotFoundException.class)
+	public ResponseEntity<String> handleLendItemNotFoundException(Exception e) {
+		ResponseEntity<String> responseEntity = new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+		return responseEntity;
+	}
 }
