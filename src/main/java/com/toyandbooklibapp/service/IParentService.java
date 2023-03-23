@@ -13,6 +13,6 @@ public interface IParentService {
 	public Parent updateParent(Parent parent) throws ParentNotFoundException;
 	public Parent deleteParent(Integer parentId) throws ParentNotFoundException;
 	public Parent viewParent(Integer parentId) throws ParentNotFoundException;
-	public Parent getParentByMembershipType(MembershipType membershiptType);
+	public Parent getParentByMembershipType(MembershipType membershiptType) throws ParentNotFoundException;
 
 }

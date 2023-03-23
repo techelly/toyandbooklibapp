@@ -58,9 +58,21 @@ public class ParentService implements IParentService {
 	}
 
 	@Override
-	public Parent updateParent(Parent parent) {
-		// TODO Auto-generated method stub
-		return null;
+	public Parent updateParent(Parent parent) throws ParentNotFoundException {
+		Optional<ParentEntity> optionalParent = parentRepository.findById(parent.getParentId());
+		if (!optionalParent.isPresent()) {
+			throw new ParentNotFoundException("Toy not existing with id:" + parent.getParentId());
+		}
+		ParentEntity parentEntity = optionalParent.get();
+		// convert parent entity to parent model
+		Parent newParent = new Parent();
+		BeanUtils.copyProperties(parentEntity, newParent);
+
+		ParentEntity newParentEntity = parentRepository.save(parentEntity);
+		// convert toy entity to toy model
+		Parent nParent = new Parent();
+		BeanUtils.copyProperties(newParentEntity, nParent);
+		return nParent;
 	}
 
 	@Override
@@ -90,11 +102,23 @@ public class ParentService implements IParentService {
 		BeanUtils.copyProperties(parentEntity, parent);
 		return parent;
 	}
-
+	
+	/**
+	 * Test properly
+	 * @throws ParentNotFoundException 
+	 */
 	@Override
-	public Parent getParentByMembershipType(MembershipType membershiptType) {
-		// TODO Auto-generated method stub
-		return null;
+	public Parent getParentByMembershipType(MembershipType membershiptType) throws ParentNotFoundException {
+		Integer parentId = membershiptType.getPayments().get(0).getParent().getParentId();
+		Optional<ParentEntity> optionalParent = parentRepository.findById(parentId);
+		if (!optionalParent.isPresent()) {
+			throw new ParentNotFoundException("Parent not existing with id:" + parentId);
+		}
+		ParentEntity parentEntity = optionalParent.get();
+		// convert parent entity to parent model
+		Parent parent = new Parent();
+		BeanUtils.copyProperties(parentEntity, parent);
+		return parent;
 	}
 
 }
