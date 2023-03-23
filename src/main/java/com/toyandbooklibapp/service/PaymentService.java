@@ -8,12 +8,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.toyandbooklibapp.entities.ParentEntity;
 import com.toyandbooklibapp.entities.PaymentEntity;
-import com.toyandbooklibapp.exceptions.ParentNotFoundException;
 import com.toyandbooklibapp.exceptions.PaymentNotFoundException;
 import com.toyandbooklibapp.exceptions.ResourceNotFoundException;
-import com.toyandbooklibapp.model.Parent;
 import com.toyandbooklibapp.model.Payment;
 import com.toyandbooklibapp.repositories.IPaymentRepository;
 
